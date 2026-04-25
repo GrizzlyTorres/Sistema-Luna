@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="description" content="Descrição da página aqui">
+
+    <link rel="stylesheet" href="inserir.css">
+    <style>
+        .dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #1976d2;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.destaque {
+    grid-column: span 2;
+}
+
+.atalhos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.atalhos button {
+    padding: 10px;
+    border: none;
+    background-color: #1976d2;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.atalhos button:hover {
+    background-color: #0d47a1;
+}
+
+.card ul {
+    margin-top: 10px;
+    padding-left: 15px;
+}
+
+.card li {
+    margin-bottom: 5px;
+}
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>Clínica Luna de Psicologia</h1>
+    </header>
+    <nav class="top-nav">
+        <div class="menu-icon">&#9776;</div>
+    
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listar.html">Cadastrar</a></li>
+            <li><a href="agenda.html">Pacientes</a></li>
+            <li><a href="agendar.html">Agendar</a></li>
+            <li><a href="pagamentos.html">Pagamentos</a></li>
+        </ul>
+    
+        <div class="nav-extra">
+            <input type="text" placeholder="Busca Rápida">
+            <a href="login.html" class="btn-sair">Sair</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="dashboard">
+
+            <section class="card destaque">
+                <h2>Hoje - 24/04</h2>
+                <ul>
+                    <li>09:00 - João Silva</li>
+                    <li>10:30 - Maria Souza</li>
+                    <li>14:00 - Carlos Lima</li>
+                    <li>16:00 - Ana Paula</li>
+                </ul>
+            </section>
+        
+            <section class="card atalhos">
+                <h2>Atalhos</h2>
+                <button>+ Novo Paciente</button>
+                <button>+ Agendar Consulta</button>
+                <button>Ver Pacientes</button>
+            </section>
+        
+            <section class="card">
+                <h2>Próximos Atendimentos</h2>
+                <ul>
+                    <li>Amanhã - 3 consultas</li>
+                    <li>Quinta-feira - 5 consultas</li>
+                    <li>Sexta-feira - 2 consultas</li>
+                </ul>
+            </section>
+        
+            <section class="card">
+                <h2>Pacientes Recentes</h2>
+                <ul>
+                    <li>Ana Paula</li>
+                    <li>Lucas Mendes</li>
+                    <li>Fernanda Rocha</li>
+                </ul>
+            </section>
+        
+            <section class="card">
+                <h2>Avisos</h2>
+                <ul>
+                    <li>João faltou última consulta</li>
+                    <li>Maria pediu remarcação</li>
+                    <li>Paciente novo aguardando cadastro</li>
+                </ul>
+            </section>
+        
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Sistema de Listagem de Pacientes Luna</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
