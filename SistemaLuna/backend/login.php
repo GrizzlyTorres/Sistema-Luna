@@ -33,7 +33,7 @@ try {
     
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // 3. Verifica a senha criptografada
+// 3. Verifica a senha criptografada
     if ($usuario && password_verify($senha, $usuario['senha_hash'])) {
         
         // Gera um token único
@@ -50,6 +50,11 @@ try {
             "nome_usuario" => $usuario['nome'],
             "mensagem" => "Login aprovado"
         ]);
+        exit;
+    } else {
+        // O BLOCO QUE FALTAVA! Se a senha não bater, devolve este JSON:
+        http_response_code(401);
+        echo json_encode(["sucesso" => false, "mensagem" => "E-mail ou senha incorretos."]);
         exit;
     }
 } catch (PDOException $e) {
