@@ -35,18 +35,21 @@ try {
 
     // 3. Verifica a senha criptografada
     if ($usuario && password_verify($senha, $usuario['senha_hash'])) {
+        
+        // Gera um token único
+        $token = bin2hex(random_bytes(16));
+        
+        // Salva o token no banco de dados para este usuário
+        $stmtUpdate = $pdo->prepare("UPDATE usuarios SET token = :token WHERE id = :id");
+        $stmtUpdate->execute([':token' => $token, ':id' => $usuario['id']]);
+
         http_response_code(200);
         echo json_encode([
             "sucesso" => true,
-            "token" => bin2hex(random_bytes(16)), // Gera um token de sessão
+            "token" => $token,
             "nome_usuario" => $usuario['nome'],
             "mensagem" => "Login aprovado"
         ]);
-        exit;
-    } else {
-        // Falha no login
-        http_response_code(401);
-        echo json_encode(["sucesso" => false, "mensagem" => "E-mail ou senha incorretos."]);
         exit;
     }
 } catch (PDOException $e) {
