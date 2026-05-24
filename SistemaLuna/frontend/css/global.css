@@ -1,0 +1,162 @@
+/* =========================================
+   RESET GERAL
+   Remove margens indesejadas e padroniza a caixa
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6; /* Fundo cinza bem claro para o sistema */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Faz o rodapé ficar sempre no fim da página */
+}
+
+/* =========================================
+   ESTRUTURA PRINCIPAL (Cabeçalho, Main, Rodapé)
+========================================= */
+header {
+    background-color: #092144;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 26px;
+    margin: 0;
+}
+
+main {
+    flex: 1; /* Faz o conteúdo principal expandir para empurrar o rodapé */
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o conteúdo na tela grande */
+    width: 100%;
+}
+
+footer {
+    background-color: #092144;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+/* =========================================
+   MENU DE NAVEGAÇÃO (Top Nav)
+========================================= */
+.top-nav {
+    background-color: #1976d2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: #0d47a1;
+}
+
+.nav-extra {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-sair {
+    background-color: #e53935; /* Vermelho */
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-sair:hover {
+    background-color: #b71c1c;
+}
+
+.menu-icon {
+    display: none; /* Usado futuramente para menu em celulares */
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* =========================================
+   ELEMENTOS DE FORMULÁRIO GLOBAIS
+   (Usados nas telas Listar, Agendar, etc)
+========================================= */
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+input[type="text"], 
+input[type="date"], 
+input[type="tel"], 
+input[type="email"], 
+input[type="password"],
+select, 
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+/* Efeito ao clicar no campo de texto */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.2);
+}
+
+/* =========================================
+   BOTÕES PADRÕES DO SISTEMA
+========================================= */
+button, .btn-primary {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn-primary:hover {
+    background-color: #0d47a1;
+}
