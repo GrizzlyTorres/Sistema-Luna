@@ -1,0 +1,32 @@
+/* frontend/css/dashboard.css */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-padrao);
+}
+
+.card h2 {
+    color: var(--cor-secundaria);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--cor-fundo);
+    padding-bottom: 0.5rem;
+}
+
+.card ul { list-style: none; }
+.card li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.95rem; }
+.card li:last-child { border-bottom: none; }
+
+.destaque { grid-column: 1 / -1; background-color: var(--cor-primaria); color: white; }
+.destaque h2 { color: white; border-bottom-color: rgba(255,255,255,0.2); }
+.destaque li { border-bottom-color: rgba(255,255,255,0.1); }
+
+.atalhos button { display: block; width: 100%; margin-bottom: 0.75rem; background: var(--cor-fundo); color: var(--cor-primaria); border: 1px solid var(--cor-primaria); font-weight: bold; }
+.atalhos button:hover { background: var(--cor-primaria); color: white; }

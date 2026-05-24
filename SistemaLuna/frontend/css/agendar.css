@@ -1,40 +1,41 @@
 /* frontend/css/agendar.css */
-
 .agendamento-container {
-    max-width: 600px;
-    margin: auto;
+    max-width: 700px;
+    margin: 0 auto;
     background: white;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding: 2.5rem;
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-padrao);
 }
 
 .agendamento-container h2 {
-    margin-bottom: 20px;
-    color: #092144;
+    margin-bottom: 1.5rem;
+    color: var(--cor-secundaria);
+    text-align: center;
+    border-bottom: 2px solid var(--cor-fundo);
+    padding-bottom: 1rem;
 }
 
 .form-agendamento {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .linha {
     display: flex;
-    gap: 10px;
+    gap: 1.5rem;
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
 }
 
 .linha .form-group {
     flex: 1;
+    min-width: 200px;
 }
 
-/* O botão já herda o visual do global.css, só precisamos dar uma margem no topo */
 .btn-confirmar {
-    margin-top: 10px;
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
 }

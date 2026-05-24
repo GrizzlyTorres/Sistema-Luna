@@ -6,170 +6,157 @@
     --cor-texto: #333;
     --cor-perigo: #e53935;
     --cor-perigo-hover: #b71c1c;
+    --cor-sucesso: #4caf50;
+    --cor-sucesso-hover: #2e7d32;
     --cor-borda: #ccc;
     --cor-foco: rgba(25, 118, 210, 0.2);
     --cor-label: #444;
-    --sombra-padrao: 0 2px 6px rgba(0,0,0,0.05);
+    --sombra-padrao: 0 4px 12px rgba(0,0,0,0.05);
+    --raio-borda: 6px;
+    --transicao: 0.3s ease;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Reset e Configurações Base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    line-height: 1.6;
 }
 
+/* Estrutura Principal */
 header {
     background-color: var(--cor-secundaria);
     color: white;
-    padding: 20px;
+    padding: 1.5rem 2rem;
     text-align: center;
 }
 
-header h1 {
-    font-size: 26px;
-    margin: 0;
-}
+header h1 { font-size: 1.8rem; margin: 0; }
 
 main {
     flex: 1;
-    padding: 30px 20px;
+    padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 footer {
     background-color: var(--cor-secundaria);
     color: white;
     text-align: center;
-    padding: 15px;
-    font-size: 14px;
+    padding: 1rem;
+    font-size: 0.875rem;
     margin-top: auto;
 }
 
+/* Navegação Topo */
 .top-nav {
     background-color: var(--cor-primaria);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 30px;
+    padding: 0.8rem 2rem;
     color: white;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    border-radius: var(--raio-borda);
+    transition: background-color var(--transicao);
 }
 
-.nav-links a:hover {
+.nav-links a:hover, 
+.nav-links a[aria-current="page"] {
     background-color: var(--cor-primaria-hover);
 }
 
 .nav-extra {
     display: flex;
-    gap: 15px;
+    gap: 1rem;
     align-items: center;
 }
 
-.btn-sair {
-    background-color: var(--cor-perigo);
-    color: white;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: 0.3s;
+.nav-extra search form { display: flex; align-items: center; }
+
+/* Acessibilidade: Oculta visualmente, mas mantém para leitores de tela */
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;
 }
 
-.btn-sair:hover {
-    background-color: var(--cor-perigo-hover);
+/* Botões Padronizados */
+button, .btn-primary, .btn-sair, .btn-novo {
+    display: inline-flex; justify-content: center; align-items: center;
+    background-color: var(--cor-primaria); color: white; border: none;
+    padding: 0.6rem 1.2rem; border-radius: var(--raio-borda); cursor: pointer;
+    font-size: 0.95rem; font-weight: 600; text-decoration: none;
+    transition: all var(--transicao); font-family: inherit;
 }
 
-.menu-icon {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: white;
-}
+button:hover, .btn-primary:hover { background-color: var(--cor-primaria-hover); }
 
-label {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: var(--cor-label);
-}
+.btn-sair { background-color: var(--cor-perigo); }
+.btn-sair:hover { background-color: var(--cor-perigo-hover); }
 
-input[type="text"], 
-input[type="date"], 
-input[type="tel"], 
-input[type="email"], 
-input[type="password"],
-select, 
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--cor-borda);
-    border-radius: 5px;
-    font-size: 14px;
-    font-family: inherit;
-    transition: border-color 0.3s;
-}
-
-input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--cor-primaria);
-    box-shadow: 0 0 5px var(--cor-foco);
-}
-
-button, .btn-primary {
-    background-color: var(--cor-primaria);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-}
-
-button:hover, .btn-primary:hover {
-    background-color: var(--cor-primaria-hover);
-}
-
+/* Formulários Padrão */
 fieldset {
-    border: 1px solid var(--cor-borda);
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 15px;
+    border: 1px solid var(--cor-borda); border-radius: var(--raio-borda);
+    padding: 1.5rem; margin-bottom: 1.5rem; background-color: white;
 }
 
 legend {
-    font-size: 15px;
-    font-weight: bold;
-    color: var(--cor-secundaria);
-    padding: 0 10px;
+    font-size: 1rem; font-weight: 700; color: var(--cor-secundaria);
+    padding: 0 0.5rem;
+}
+
+.form-group, .input-group {
+    display: flex; flex-direction: column; margin-bottom: 1rem;
+}
+
+label {
+    font-size: 0.875rem; font-weight: 600; margin-bottom: 0.4rem;
+    color: var(--cor-label);
+}
+
+input:not([type="submit"]), select, textarea {
+    width: 100%; padding: 0.75rem; border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda); font-size: 0.95rem; font-family: inherit;
+    transition: all var(--transicao);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px var(--cor-foco);
+}
+
+/* Menu Mobile Responsivo */
+.menu-icon { display: none; font-size: 1.5rem; background: none; }
+
+@media (max-width: 768px) {
+    .top-nav { flex-direction: column; align-items: stretch; }
+    .nav-links { flex-direction: column; width: 100%; text-align: center; }
+    .nav-extra { flex-direction: column; width: 100%; }
+    .nav-extra input[type="search"] { width: 100%; }
 }
