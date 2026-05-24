@@ -13,11 +13,28 @@
     </header>
     
     <nav class="top-nav" aria-label="Navegação Principal">
-        </nav>
+        <button type="button" class="menu-icon" aria-label="Abrir menu lateral">&#9776;</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listar.html">Cadastrar</a></li>
+            <li><a href="agenda.html" aria-current="page">Pacientes</a></li>
+            <li><a href="agendar.html">Agendar</a></li>
+            <li><a href="pagamentos.html">Pagamentos</a></li>
+        </ul>
+    
+        <div class="nav-extra">
+            <search>
+                <form action="busca.html">
+                    <label for="busca-global" style="display:none;">Busca Rápida</label>
+                    <input type="search" id="busca-global" placeholder="Busca Rápida">
+                </form>
+            </search>
+            <a href="login.html" class="btn-sair">Sair</a>
+        </div>
+    </nav>
 
     <main>
         <section class="pacientes-container" aria-labelledby="titulo-pacientes">
-    
             <header class="topo">
                 <h2 id="titulo-pacientes">👥 Pacientes Cadastrados</h2>
                 <a href="listar.html" class="btn-novo">+ Novo Paciente</a>
@@ -60,9 +77,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    </tbody>
+                </tbody>
             </table>
-    
         </section>
     </main>
 

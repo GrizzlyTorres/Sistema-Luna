@@ -14,7 +14,7 @@
     </header>
 
     <nav class="top-nav" aria-label="Navegação Principal">
-        <div class="menu-icon" aria-hidden="true">&#9776;</div>
+        <button type="button" class="menu-icon" aria-label="Abrir menu lateral">&#9776;</button>
         <ul class="nav-links">
             <li><a href="index.html" aria-current="page">Home</a></li>
             <li><a href="listar.html">Cadastrar</a></li>
@@ -23,18 +23,19 @@
             <li><a href="pagamentos.html">Pagamentos</a></li>
         </ul>
     
-        <search class="nav-extra">
-            <form action="busca.html">
-                <label for="busca-global" style="display:none;">Busca Rápida</label>
-                <input type="search" id="busca-global" placeholder="Busca Rápida">
-            </form>
-            <a href="1 login.html" class="btn-sair">Sair</a>
-        </search>
+        <div class="nav-extra">
+            <search>
+                <form action="busca.html">
+                    <label for="busca-global" style="display:none;">Busca Rápida</label>
+                    <input type="search" id="busca-global" placeholder="Busca Rápida">
+                </form>
+            </search>
+            <a href="login.html" class="btn-sair">Sair</a>
+        </div>
     </nav>
 
     <main>
         <section class="dashboard" aria-label="Resumo do Painel">
-
             <article class="card destaque">
                 <h2>Hoje - 24/04</h2>
                 <ul>
@@ -78,7 +79,6 @@
                     <li>Paciente novo aguardando cadastro</li>
                 </ul>
             </article>
-        
         </section>
     </main>
 

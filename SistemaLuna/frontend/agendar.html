@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendar Sessão - Clínica Luna</title>
     <meta name="description" content="Página para agendamento de sessões e consultas da Clínica Luna">
-
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/agendar.css">
 </head>
@@ -15,8 +14,7 @@
     </header>
     
     <nav class="top-nav" aria-label="Navegação Principal">
-        <div class="menu-icon" aria-hidden="true">&#9776;</div>
-    
+        <button type="button" class="menu-icon" aria-label="Abrir menu lateral">&#9776;</button>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="listar.html">Cadastrar</a></li>
@@ -25,57 +23,61 @@
             <li><a href="pagamentos.html">Pagamentos</a></li>
         </ul>
     
-        <search class="nav-extra">
-            <form action="busca.html">
-                <label for="busca-global" style="display:none;">Busca Rápida</label>
-                <input type="search" id="busca-global" placeholder="Busca Rápida">
-            </form>
-            <a href="1 login.html" class="btn-sair">Sair</a>
-        </search>
+        <div class="nav-extra">
+            <search>
+                <form action="busca.html">
+                    <label for="busca-global" style="display:none;">Busca Rápida</label>
+                    <input type="search" id="busca-global" placeholder="Busca Rápida">
+                </form>
+            </search>
+            <a href="login.html" class="btn-sair">Sair</a>
+        </div>
     </nav>
 
     <main>
         <section class="agendamento-container" aria-labelledby="titulo-agendamento">
-    
             <h2 id="titulo-agendamento">Agendar Sessão</h2>
     
             <form class="form-agendamento" action="#" method="POST">
-    
-                <div class="form-group">
-                    <label for="paciente">Paciente (Nome ou CPF)</label>
-                    <input type="text" id="paciente" name="paciente" placeholder="Digite o nome ou CPF do paciente" required>
-                </div>
-    
-                <div class="linha">
+                <fieldset>
+                    <legend>Identificação e Período</legend>
                     <div class="form-group">
-                        <label for="data-consulta">Data da Consulta</label>
-                        <input type="date" id="data-consulta" name="data_consulta" required>
+                        <label for="paciente">Paciente (Nome ou CPF)</label>
+                        <input type="text" id="paciente" name="paciente" placeholder="Digite o nome ou CPF do paciente" required>
                     </div>
-    
-                    <div class="form-group">
-                        <label for="horario">Horário</label>
-                        <input type="time" id="horario" name="horario" required>
+        
+                    <div class="linha">
+                        <div class="form-group">
+                            <label for="data-consulta">Data da Consulta</label>
+                            <input type="date" id="data-consulta" name="data_consulta" required>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="horario">Horário</label>
+                            <input type="time" id="horario" name="horario" required>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
                 
-                <div class="form-group">
-                    <label for="tipo-atendimento">Tipo de Atendimento</label>
-                    <select id="tipo-atendimento" name="tipo_atendimento" required>
-                        <option value="">Selecione</option>
-                        <option value="avulso">Pagamento por sessão</option>
-                        <option value="pacote">Pacote mensal</option>
-                    </select>
-                </div>
-    
-                <div class="form-group">
-                    <label for="informacoes">Informações adicionais</label>
-                    <textarea id="informacoes" name="informacoes" rows="4" placeholder="Observações sobre a sessão..."></textarea>
-                </div>
+                <fieldset>
+                    <legend>Detalhes do Atendimento</legend>
+                    <div class="form-group">
+                        <label for="tipo-atendimento">Tipo de Atendimento</label>
+                        <select id="tipo-atendimento" name="tipo_atendimento" required>
+                            <option value="">Selecione</option>
+                            <option value="avulso">Pagamento por sessão</option>
+                            <option value="pacote">Pacote mensal</option>
+                        </select>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="informacoes">Informações adicionais</label>
+                        <textarea id="informacoes" name="informacoes" rows="4" placeholder="Observações sobre a sessão..."></textarea>
+                    </div>
+                </fieldset>
     
                 <button type="submit" class="btn-confirmar">Confirmar Agendamento</button>
-    
             </form>
-    
         </section>
     </main>
 
