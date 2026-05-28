@@ -1,20 +1,16 @@
 <?php
-// backend/verifica_auth.php
 header("Content-Type: application/json; charset=UTF-8");
 
 $headers = apache_request_headers();
 
-// 1. Verifica se o navegador enviou o token de autorização
 if (!isset($headers['Authorization'])) {
     http_response_code(401);
     echo json_encode(["sucesso" => false, "mensagem" => "Acesso negado. Token não fornecido."]);
-    exit; // Bloqueia a execução imediatamente!
+    exit; 
 }
 
-// O token vem no formato "Bearer token_aqui". Precisamos extrair só o código.
 $tokenEnviado = str_replace("Bearer ", "", $headers['Authorization']);
 
-// 2. Conecta ao banco de dados
 $host = "localhost";
 $db_name = "clinica_luna";
 $username = "root";
@@ -24,20 +20,17 @@ try {
     $pdo = new PDO("mysql:host={$host};dbname={$db_name};charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // 3. Verifica se o token existe no banco de dados
     $stmt = $pdo->prepare("SELECT id, nome FROM usuarios WHERE token = :token LIMIT 1");
     $stmt->bindParam(":token", $tokenEnviado);
     $stmt->execute();
 
-    // Se não encontrar o token, bloqueia
     if ($stmt->rowCount() === 0) {
         http_response_code(401);
         echo json_encode(["sucesso" => false, "mensagem" => "Token inválido ou expirado."]);
         exit;
     }
 
-    // Se a execução passou direto até aqui, o token é válido!
-    // Você pode até pegar os dados do usuário se precisar
+    
     $usuarioLogado = $stmt->fetch(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
