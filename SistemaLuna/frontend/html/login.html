@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Clínica Luna</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <main class="login-container">
+        <img src="../img/Luna-removebg-preview.png" alt="Logo Clínica Luna" class="logo">
+
+        <h2>Acesso ao Sistema</h2>
+
+        <form id="form-login">
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required autocomplete="email">
+            </div>
+        
+            <div class="input-group senha-container">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required autocomplete="current-password">
+                <button type="button" class="toggle-senha" onclick="toggleSenha()" aria-label="Mostrar senha">Mostrar</button>
+            </div>
+        
+            <button type="submit" id="btn-entrar" class="btn-principal">Entrar</button>
+
+            <p id="msg-erro" class="mensagem-erro" aria-live="polite"></p>
+        </form>
+
+        <div class="footer">
+            Sistema interno - Clínica Luna
+        </div>
+    </main>
+
+    <script>
+        function toggleSenha() {
+            const input = document.getElementById("senha");
+            const toggle = document.querySelector(".toggle-senha");
+
+            if (input.type === "password") {
+                input.type = "text";
+                toggle.textContent = "Ocultar";
+            } else {
+                input.type = "password";
+                toggle.textContent = "Mostrar";
+            }
+        }
+
+        const formLogin = document.getElementById("form-login");
+        const msgErro = document.getElementById("msg-erro");
+        const btnEntrar = document.getElementById("btn-entrar");
+
+        formLogin.addEventListener("submit", async function(event) {
+            event.preventDefault(); 
+
+            msgErro.textContent = ""; 
+            btnEntrar.textContent = "A Autenticar...";
+            btnEntrar.disabled = true;
+
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            try {
+                
+                const resposta = await fetch("../backend/login.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email: email, senha: senha })
+                });
+
+                const dados = await resposta.json();
+
+                if (resposta.ok && dados.sucesso) {
+                    sessionStorage.setItem("luna_auth_token", dados.token);
+                    
+                    window.location.href = "index.html";
+                } else {
+                    throw new Error(dados.mensagem || "Erro ao tentar iniciar sessão.");
+                }
+
+            } catch (erro) {
+                msgErro.textContent = erro.message;
+            } finally {
+                btnEntrar.textContent = "Entrar";
+                btnEntrar.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
