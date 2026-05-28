@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel - Clínica Luna</title>
+    <meta name="description" content="Dashboard do sistema da Clínica Luna">
 
+    <script src="../js/auth.js"></script>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Clínica Luna de Psicologia</h1>
+    </header>
+
+    <nav class="top-nav" aria-label="Navegação Principal">
+        <button type="button" class="menu-icon" aria-label="Abrir menu lateral">&#9776;</button>
+        <ul class="nav-links">
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            <li><a href="listar.html">Cadastrar</a></li>
+            <li><a href="agenda.html">Pacientes</a></li>
+            <li><a href="agendar.html">Agendar</a></li>
+        </ul>
+    
+        <div class="nav-extra">
+            <search>
+    <search>
+    <form action="agenda.html" method="GET">
+        <label for="busca-global" style="display:none;">Busca Rápida</label>
+        <input type="search" id="busca-global" name="nome" placeholder="Busca Rápida">
+    </form>
+</search>
+            <a href="login.html" class="btn-sair">Sair</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="dashboard" aria-label="Resumo do Painel">
+            
+            <article class="card destaque">
+                <h2 id="titulo-hoje">Hoje - Carregando...</h2>
+                <ul id="lista-hoje">
+                    <li>A buscar dados...</li>
+                </ul>
+            </article>
+        
+            <article class="card atalhos">
+                <h2>Atalhos</h2>
+                <button type="button" onclick="window.location.href='listar.html'">+ Novo Paciente</button>
+                <button type="button" onclick="window.location.href='agendar.html'">+ Agendar Consulta</button>
+                <button type="button" onclick="window.location.href='agenda.html'">Ver Pacientes</button>
+            </article>
+        
+            <article class="card">
+                <h2>Próximos Atendimentos</h2>
+                <ul id="lista-proximos">
+                    <li>A buscar dados...</li>
+                </ul>
+            </article>
+        
+            <article class="card">
+                <h2>Pacientes Recentes</h2>
+                <ul id="lista-recentes">
+                    <li>A carregar dados...</li>
+                </ul>
+            </article>
+        
+            <article class="card">
+                <h2>Avisos</h2>
+                <ul id="lista-avisos">
+                    </ul>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Sistema de Gestão Clínica Luna</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
