@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     method: "GET",
                     headers: getAuthHeaders()
                 });
-                
+
                 const resultado = await resposta.json();
 
                 if (resposta.ok && resultado.sucesso) {
-                    
+
                     listaHoje.innerHTML = "";
                     if (resultado.hoje.length === 0) {
                         listaHoje.innerHTML = "<li>Nenhum atendimento pendente para hoje.</li>";
@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         resultado.hoje.forEach(agendamento => {
                             const li = document.createElement("li");
                             const infoJson = JSON.stringify(agendamento).replace(/'/g, "&apos;").replace(/"/g, "&quot;");
-                            
+
                             li.innerHTML = `
-                                <time datetime="${agendamento.horario}">${agendamento.horario.substring(0,5)}</time> - 
+                                <time datetime="${agendamento.horario}">${agendamento.horario.substring(0, 5)}</time> - 
                                 <a href="#" class="link-paciente" data-info="${infoJson}"><strong>${agendamento.paciente_info}</strong></a>
                                 <button class="btn-concluir" data-id="${agendamento.id}" title="Marcar atendimento como realizado" style="margin-left:auto; background:none; border:none; color:green; cursor:pointer; font-size: 1.2rem;">✔️</button>
                             `;
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             const li = document.createElement("li");
                             const dataFormatada = agendamento.data_consulta.split('-').reverse().join('/');
                             const infoJson = JSON.stringify(agendamento).replace(/'/g, "&apos;").replace(/"/g, "&quot;");
-                            li.innerHTML = `<span>${dataFormatada} às ${agendamento.horario.substring(0,5)}</span> - <a href="#" class="link-paciente" data-info="${infoJson}">${agendamento.paciente_info}</a>`;
+                            li.innerHTML = `<span>${dataFormatada} às ${agendamento.horario.substring(0, 5)}</span> - <a href="#" class="link-paciente" data-info="${infoJson}">${agendamento.paciente_info}</a>`;
                             listaProximos.appendChild(li);
                         });
                     }
@@ -81,24 +81,24 @@ document.addEventListener("DOMContentLoaded", () => {
                             e.preventDefault();
                             const dados = JSON.parse(e.target.closest('a').getAttribute('data-info'));
                             const dataBR = dados.data_consulta.split('-').reverse().join('/');
-                            alert(`📝 DETALHES DA SESSÃO\n\nPaciente: ${dados.paciente_info}\nData: ${dataBR}\nHorário: ${dados.horario.substring(0,5)}\nTipo: ${dados.tipo_atendimento === 'pacote' ? 'Pacote Mensal' : 'Sessão Avulsa'}\nInformações: ${dados.informacoes || 'Nenhuma.'}`);
+                            alert(`📝 DETALHES DA SESSÃO\n\nPaciente: ${dados.paciente_info}\nData: ${dataBR}\nHorário: ${dados.horario.substring(0, 5)}\nTipo: ${dados.tipo_atendimento === 'pacote' ? 'Pacote Mensal' : 'Sessão Avulsa'}\nInformações: ${dados.informacoes || 'Nenhuma.'}`);
                         });
                     });
 
                     document.querySelectorAll('.btn-concluir').forEach(btn => {
                         btn.addEventListener('click', async (e) => {
                             const idAgendamento = e.target.getAttribute('data-id');
-                            if(confirm("Deseja finalizar esta consulta?")) {
+                            if (confirm("Deseja finalizar esta consulta?")) {
                                 try {
                                     const resp = await fetch("../../backend/marcar_atendido.php", {
                                         method: "POST",
                                         headers: getAuthHeaders(),
                                         body: JSON.stringify({ id: idAgendamento })
                                     });
-                                    if(resp.ok) {
-                                        carregarDashboard(); 
+                                    if (resp.ok) {
+                                        carregarDashboard();
                                     }
-                                } catch(err) { alert("Erro ao concluir."); }
+                                } catch (err) { alert("Erro ao concluir."); }
                             }
                         });
                     });
@@ -131,14 +131,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 listaAvisos.innerHTML = "<li>Nenhum aviso pendente.</li>";
                 return;
             }
-            
+
             avisos.forEach(aviso => {
                 const li = document.createElement("li");
                 li.style.display = "flex";
                 li.style.justifyContent = "space-between";
                 li.style.alignItems = "center";
                 li.style.marginBottom = "5px";
-                
+
                 li.innerHTML = `
                     <span>${aviso.texto}</span>
                     <button class="btn-excluir-aviso" data-id="${aviso.id}" title="Excluir aviso" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; font-size:1.1rem;">&times;</button>
@@ -158,34 +158,68 @@ document.addEventListener("DOMContentLoaded", () => {
         renderizarAvisos();
     }
 
-// ==========================================
+    // ==========================================
     // TELA DE CADASTRO E EDIÇÃO (listar.html)
     // ==========================================
     const formCadastro = document.querySelector("form[action='#'][method='POST']");
     const tituloCadastro = document.getElementById("titulo-cadastro");
 
+    // --- INÍCIO DO CÓDIGO DAS MÁSCARAS ---
+    const inputCpf = document.getElementById('cpf');
+    const inputTelefone = document.getElementById('telefone');
+
+    if (inputCpf) {
+        inputCpf.addEventListener('input', function (e) {
+            let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+            if (valor.length > 11) valor = valor.slice(0, 11); // Limita a 11 dígitos
+
+            // Aplica a formatação: 000.000.000-00
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+            e.target.value = valor;
+        });
+    }
+
+    if (inputTelefone) {
+        inputTelefone.addEventListener('input', function (e) {
+            let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+            if (valor.length > 11) valor = valor.slice(0, 11); // Limita a 11 dígitos
+
+            // Aplica a formatação para celular (11 dígitos) ou fixo (10 dígitos)
+            valor = valor.replace(/^(\d{2})(\d)/g, '($1) $2');
+            valor = valor.replace(/(\d)(\d{4})$/, '$1-$2');
+
+            e.target.value = valor;
+        });
+    }
+    // --- FIM DO CÓDIGO DAS MÁSCARAS ---
+
     if (tituloCadastro && formCadastro) {
-        
+
         const urlParams = new URLSearchParams(window.location.search);
         const idEditar = urlParams.get('editar');
         const btnSubmit = formCadastro.querySelector("button[type='submit']");
 
-        
+
         if (idEditar) {
             tituloCadastro.textContent = "✏️ Editar Paciente";
             btnSubmit.textContent = "Salvar Alterações";
 
-            
+
             async function carregarDadosParaEdicao() {
                 try {
                     const resp = await fetch(`../../backend/buscar_paciente.php?id=${idEditar}`, {
                         headers: getAuthHeaders()
                     });
                     const res = await resp.json();
-                    
+
                     if (resp.ok && res.sucesso) {
                         const p = res.paciente;
-                        
+
                         formCadastro.elements['nome'].value = p.nome || '';
                         formCadastro.elements['nascimento'].value = p.data_nascimento || '';
                         formCadastro.elements['cpf'].value = p.cpf || '';
@@ -200,28 +234,28 @@ document.addEventListener("DOMContentLoaded", () => {
                         formCadastro.elements['observacoes'].value = p.observacoes || '';
                     } else {
                         alert("Erro ao carregar paciente.");
-                        window.location.href = "agenda.html"; 
+                        window.location.href = "agenda.html";
                     }
-                } catch(err) {
+                } catch (err) {
                     console.error("Erro na busca", err);
                 }
             }
             carregarDadosParaEdicao();
         }
 
-        
+
         formCadastro.addEventListener("submit", async (e) => {
-            e.preventDefault(); 
-            
+            e.preventDefault();
+
             const formData = new FormData(formCadastro);
             const dados = Object.fromEntries(formData.entries());
-            
-            
+
+
             if (idEditar) {
                 dados.id = idEditar;
             }
 
-            
+
             const endpoint = idEditar ? "../../backend/editar_paciente.php" : "../../backend/cadastrar_paciente.php";
 
             try {
@@ -238,12 +272,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (resposta.ok && resultado.sucesso) {
                     alert(resultado.mensagem);
-                    
-                    
+
+
                     if (idEditar) {
                         window.location.href = "agenda.html";
                     } else {
-                        formCadastro.reset(); 
+                        formCadastro.reset();
                     }
                 } else {
                     alert("Erro: " + resultado.mensagem);
@@ -256,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
- // ==========================================
+    // ==========================================
     // TELA DE PACIENTES (agenda.html)
     // ==========================================
     const tabelaPacientes = document.querySelector(".tabela-pacientes tbody");
@@ -266,9 +300,9 @@ document.addEventListener("DOMContentLoaded", () => {
         async function carregarPacientes(queryString = "") {
             try {
                 tabelaPacientes.innerHTML = "<tr><td colspan='9' style='text-align:center;'>A carregar dados...</td></tr>";
-                
+
                 const url = `../../backend/listar_pacientes.php${queryString ? '?' + queryString : ''}`;
-                
+
                 const resposta = await fetch(url, {
                     method: "GET",
                     headers: getAuthHeaders()
@@ -277,8 +311,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const resultado = await resposta.json();
 
                 if (resposta.ok && resultado.sucesso) {
-                    tabelaPacientes.innerHTML = ""; 
-                    
+                    tabelaPacientes.innerHTML = "";
+
                     if (resultado.pacientes.length === 0) {
                         tabelaPacientes.innerHTML = "<tr><td colspan='9' style='text-align:center;'>Nenhum paciente encontrado.</td></tr>";
                         return;
@@ -314,14 +348,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                         body: JSON.stringify({ id: idPaciente })
                                     });
                                     const res = await resp.json();
-                                    
+
                                     if (resp.ok && res.sucesso) {
                                         alert(res.mensagem);
                                         carregarPacientes(window.location.search.substring(1));
                                     } else {
                                         alert("Erro: " + res.mensagem);
                                     }
-                                } catch(err) {
+                                } catch (err) {
                                     alert("Erro ao tentar excluir.");
                                 }
                             }
@@ -348,7 +382,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (formFiltros) {
             formFiltros.addEventListener("submit", (e) => {
-                e.preventDefault(); 
+                e.preventDefault();
                 const parametros = new URLSearchParams(new FormData(formFiltros)).toString();
                 carregarPacientes(parametros);
             });
