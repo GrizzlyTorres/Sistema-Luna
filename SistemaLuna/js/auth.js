@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (token) {
         try {
-            const resposta = await fetch("../backend/verifica_auth.php", {
+            const resposta = await fetch("../../backend/verifica_auth.php", {
                 method: "GET",
                 headers: getAuthHeaders()
             });

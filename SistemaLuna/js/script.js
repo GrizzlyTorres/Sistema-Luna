@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             async function carregarDadosParaEdicao() {
                 try {
-                    const resp = await fetch(`../backend/buscar_paciente.php?id=${idEditar}`, {
+                    const resp = await fetch(`../../backend/buscar_paciente.php?id=${idEditar}`, {
                         headers: getAuthHeaders()
                     });
                     const res = await resp.json();
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             
-            const endpoint = idEditar ? "../backend/editar_paciente.php" : "../backend/cadastrar_paciente.php";
+            const endpoint = idEditar ? "../../backend/editar_paciente.php" : "../../backend/cadastrar_paciente.php";
 
             try {
                 btnSubmit.textContent = "Aguarde...";
@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             const idPaciente = e.target.getAttribute('data-id');
                             if (confirm("Tem certeza que deseja excluir este paciente? Esta ação não pode ser desfeita.")) {
                                 try {
-                                    const resp = await fetch("../backend/excluir_paciente.php", {
+                                    const resp = await fetch("../../backend/excluir_paciente.php", {
                                         method: "POST",
                                         headers: getAuthHeaders(),
                                         body: JSON.stringify({ id: idPaciente })
@@ -372,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 btnSubmit.textContent = "A Agendar...";
                 btnSubmit.disabled = true;
 
-                const resposta = await fetch("../backend/agendar_consulta.php", {
+                const resposta = await fetch("../../backend/agendar_consulta.php", {
                     method: "POST",
                     headers: getAuthHeaders(),
                     body: JSON.stringify(dados)
