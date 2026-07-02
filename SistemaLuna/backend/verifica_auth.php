@@ -2,14 +2,21 @@
 header("Content-Type: application/json; charset=UTF-8");
 
 $headers = apache_request_headers();
+$authHeader = '';
 
-if (!isset($headers['Authorization'])) {
+if (isset($headers['Authorization'])) {
+    $authHeader = $headers['Authorization'];
+} elseif (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+}
+
+if (empty($authHeader)) {
     http_response_code(401);
     echo json_encode(["sucesso" => false, "mensagem" => "Acesso negado. Token não fornecido."]);
     exit; 
 }
 
-$tokenEnviado = str_replace("Bearer ", "", $headers['Authorization']);
+$tokenEnviado = str_replace("Bearer ", "", $authHeader);
 
 $host = "localhost";
 $db_name = "clinica_luna";

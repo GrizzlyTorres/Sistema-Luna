@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendar Sessão - Clínica Luna</title>
     <meta name="description" content="Página para agendamento de sessões e consultas da Clínica Luna">
 
-    <script src="../js/auth.js"></script>
+    <script src="../../js/auth.js"></script>
+
+    <script src="../../js/script.js"></script>
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/agendar.css">
 </head>
+
 <body>
     <header>
         <h1>Clínica Luna de Psicologia</h1>
     </header>
-    
+
     <nav class="top-nav" aria-label="Navegação Principal">
         <button type="button" class="menu-icon" aria-label="Abrir menu lateral">&#9776;</button>
         <ul class="nav-links">
@@ -24,14 +28,14 @@
             <li><a href="agenda.html">Pacientes</a></li>
             <li><a href="agendar.html" aria-current="page">Agendar</a></li>
         </ul>
-    
+
         <div class="nav-extra">
-        <search>
-    <form action="agenda.html" method="GET">
-        <label for="busca-global" style="display:none;">Busca Rápida</label>
-        <input type="search" id="busca-global" name="nome" placeholder="Busca Rápida">
-    </form>
-</search>
+            <search>
+                <form action="agenda.html" method="GET">
+                    <label for="busca-global" style="display:none;">Busca Rápida</label>
+                    <input type="search" id="busca-global" name="nome" placeholder="Busca Rápida">
+                </form>
+            </search>
             <a href="login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
@@ -39,28 +43,29 @@
     <main>
         <section class="agendamento-container" aria-labelledby="titulo-agendamento">
             <h2 id="titulo-agendamento">Agendar Sessão</h2>
-    
+
             <form class="form-agendamento" action="#" method="POST">
                 <fieldset>
                     <legend>Identificação e Período</legend>
                     <div class="form-group">
                         <label for="paciente">Paciente (Nome ou CPF)</label>
-                        <input type="text" id="paciente" name="paciente" placeholder="Digite o nome ou CPF do paciente" required>
+                        <input type="text" id="paciente" name="paciente" placeholder="Digite o nome ou CPF do paciente"
+                            required>
                     </div>
-        
+
                     <div class="linha">
                         <div class="form-group">
                             <label for="data-consulta">Data da Consulta</label>
                             <input type="date" id="data-consulta" name="data_consulta" required>
                         </div>
-        
+
                         <div class="form-group">
                             <label for="horario">Horário</label>
                             <input type="time" id="horario" name="horario" required>
                         </div>
                     </div>
                 </fieldset>
-                
+
                 <fieldset>
                     <legend>Detalhes do Atendimento</legend>
                     <div class="form-group">
@@ -71,13 +76,14 @@
                             <option value="pacote">Pacote mensal</option>
                         </select>
                     </div>
-        
+
                     <div class="form-group">
                         <label for="informacoes">Informações adicionais</label>
-                        <textarea id="informacoes" name="informacoes" rows="4" placeholder="Observações sobre a sessão..."></textarea>
+                        <textarea id="informacoes" name="informacoes" rows="4"
+                            placeholder="Observações sobre a sessão..."></textarea>
                     </div>
                 </fieldset>
-    
+
                 <button type="submit" class="btn-confirmar">Confirmar Agendamento</button>
             </form>
         </section>
@@ -89,4 +95,5 @@
 
     <script src="../js/script.js"></script>
 </body>
+
 </html>

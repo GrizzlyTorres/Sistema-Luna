@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacientes - Clínica Luna</title>
 
-    <script src="../js/auth.js"></script>
+    <script src="../../js/auth.js"></script>
+
+    <script src="../../js/script.js"></script>
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/agenda.css">
 </head>
+
 <body>
     <header>
         <h1>Clínica Luna de Psicologia</h1>
     </header>
-    
+
     <nav class="top-nav" aria-label="Navegação Principal">
         <button type="button" class="menu-icon" aria-label="Abrir menu lateral">&#9776;</button>
         <ul class="nav-links">
@@ -23,16 +27,15 @@
             <li><a href="agenda.html" aria-current="page">Pacientes</a></li>
             <li><a href="agendar.html">Agendar</a></li>
         </ul>
-    
+
         <div class="nav-extra">
-            <search>
-    <search>
-    <form action="agenda.html" method="GET">
-        <label for="busca-global" style="display:none;">Busca Rápida</label>
-        <input type="search" id="busca-global" name="nome" placeholder="Busca Rápida">
-    </form>
-</search>
-            <a href="login.html" class="btn-sair">Sair</a>
+                <search>
+                    <form action="agenda.html" method="GET">
+                        <label for="busca-global" style="display:none;">Busca Rápida</label>
+                        <input type="search" id="busca-global" name="nome" placeholder="Busca Rápida">
+                    </form>
+                </search>
+                <a href="login.html" class="btn-sair">Sair</a>
         </div>
     </nav>
 
@@ -42,29 +45,29 @@
                 <h2 id="titulo-pacientes">👥 Pacientes Cadastrados</h2>
                 <a href="listar.html" class="btn-novo">+ Novo Paciente</a>
             </header>
-    
+
             <search>
                 <form class="filtros" action="#" method="GET">
                     <label for="filtro-nome" style="display:none;">Buscar por nome</label>
                     <input type="search" id="filtro-nome" name="nome" placeholder="Buscar por nome...">
-                    
+
                     <label for="filtro-cpf" style="display:none;">Buscar por CPF</label>
                     <input type="search" id="filtro-cpf" name="cpf" placeholder="CPF">
-                    
+
                     <label for="filtro-prontuario" style="display:none;">Buscar por Prontuário</label>
                     <input type="search" id="filtro-prontuario" name="prontuario" placeholder="Prontuário">
-                    
+
                     <label for="filtro-status" style="display:none;">Status</label>
                     <select id="filtro-status" name="status">
                         <option value="">Status</option>
                         <option value="ativos">Ativos</option>
                         <option value="inativos">Inativos</option>
                     </select>
-                
+
                     <button type="submit">Buscar</button>
                 </form>
             </search>
-    
+
             <table class="tabela-pacientes">
                 <thead>
                     <tr>
@@ -91,4 +94,5 @@
 
     <script src="../js/script.js"></script>
 </body>
+
 </html>

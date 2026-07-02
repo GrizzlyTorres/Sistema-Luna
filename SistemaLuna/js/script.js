@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         async function carregarDashboard() {
             try {
-                const resposta = await fetch("../backend/carregar_dashboard.php", {
+                const resposta = await fetch("../../backend/carregar_dashboard.php", {
                     method: "GET",
                     headers: getAuthHeaders()
                 });
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             const idAgendamento = e.target.getAttribute('data-id');
                             if(confirm("Deseja finalizar esta consulta?")) {
                                 try {
-                                    const resp = await fetch("../backend/marcar_atendido.php", {
+                                    const resp = await fetch("../../backend/marcar_atendido.php", {
                                         method: "POST",
                                         headers: getAuthHeaders(),
                                         body: JSON.stringify({ id: idAgendamento })
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 tabelaPacientes.innerHTML = "<tr><td colspan='9' style='text-align:center;'>A carregar dados...</td></tr>";
                 
-                const url = `../backend/listar_pacientes.php${queryString ? '?' + queryString : ''}`;
+                const url = `../../backend/listar_pacientes.php${queryString ? '?' + queryString : ''}`;
                 
                 const resposta = await fetch(url, {
                     method: "GET",
