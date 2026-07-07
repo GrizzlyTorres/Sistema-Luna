@@ -22,8 +22,9 @@ try {
                 estado_civil = :estado_civil, 
                 religiao = :religiao, 
                 indicacao = :indicacao, 
-                observacoes = :observacoes
-                genero = :genero 
+                observacoes = :observacoes,
+                genero = :genero,
+                sexo = :sexo
             WHERE id = :id";
     
     $stmt = $pdo->prepare($sql);
@@ -41,6 +42,7 @@ try {
         ':indicacao' => $dados->indicacao ?? null,
         ':observacoes' => $dados->observacoes ?? null,
         ':genero' => $dados->genero ?? null,
+        ':sexo' => $dados->sexo ?? null,
         ':id' => $dados->id
     ]);
     

@@ -10,8 +10,8 @@ if (!$dados || empty($dados->nome) || empty($dados->cpf) || empty($dados->nascim
 }
 
 try {
-    $sql = "INSERT INTO pacientes (nome, data_nascimento, cpf, telefone, email, endereco, naturalidade, escolaridade, estado_civil, religiao, indicacao, observacoes, genero) 
-            VALUES (:nome, :nascimento, :cpf, :telefone, :email, :endereco, :naturalidade, :escolaridade, :estado_civil, :religiao, :indicacao, :observacoes, :genero)";
+    $sql = "INSERT INTO pacientes (nome, data_nascimento, cpf, telefone, email, endereco, naturalidade, escolaridade, estado_civil, religiao, indicacao, observacoes, genero, sexo) 
+            VALUES (:nome, :nascimento, :cpf, :telefone, :email, :endereco, :naturalidade, :escolaridade, :estado_civil, :religiao, :indicacao, :observacoes, :genero, :sexo)";
     
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -26,8 +26,9 @@ try {
         ':estado_civil' => $dados->estado_civil ?? null,
         ':religiao' => $dados->religiao ?? null,
         ':indicacao' => $dados->indicacao ?? null,
-        ':observacoes' => $dados->observacoes ?? null
-        ':genero' => $dados->genero ?? null
+        ':observacoes' => $dados->observacoes ?? null, 
+        ':genero' => $dados->genero ?? null,
+        ':sexo' => $dados->sexo ?? null
     ]);
     
     http_response_code(201);

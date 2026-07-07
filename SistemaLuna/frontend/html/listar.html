@@ -8,7 +8,6 @@
     <meta name="description" content="Página de cadastro de pacientes">
 
     <script src="../../js/auth.js"></script>
-
     <script src="../../js/script.js"></script>
 
     <link rel="stylesheet" href="../css/global.css">
@@ -63,11 +62,13 @@
                     </div>
 
                     <div>
-                        <label for="genero">Gênero</label>
+                        <label for="genero">Identidade de Gênero</label>
                         <select id="genero" name="genero" required>
                             <option value="">Selecione</option>
-                            <option value="feminino">Feminino</option>
-                            <option value="masculino">Masculino</option>
+                            <option value="mulher-cis">Mulher Cisgênero</option>
+                            <option value="mulher-trans">Mulher Transgênero</option>
+                            <option value="homem-cis">Homem Cisgênero</option>
+                            <option value="homem-trans">Homem Transgênero</option>
                             <option value="nao-binario">Não-binário</option>
                             <option value="outro">Outro</option>
                             <option value="nao-informado">Prefiro não informar</option>
@@ -75,13 +76,12 @@
                     </div>
 
                     <div>
-                        <label for="sexo">Sexo</label>
-                        <select id="genero" name="genero" required>
+                        <label for="sexo">Sexo (Biológico)</label>
+                        <select id="sexo" name="sexo" required>
                             <option value="">Selecione</option>
                             <option value="feminino">Feminino</option>
                             <option value="masculino">Masculino</option>
-                            <option value="outro">Outro</option>
-                            <option value="nao-informado">Prefiro não informar</option>
+                            <option value="intersexo">Intersexo</option>
                         </select>
                     </div>
                 </fieldset>

@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
@@ -171,7 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (inputCpf) {
         inputCpf.addEventListener('input', function (e) {
             let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
-
             if (valor.length > 11) valor = valor.slice(0, 11); // Limita a 11 dígitos
 
             // Aplica a formatação: 000.000.000-00
@@ -186,7 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (inputTelefone) {
         inputTelefone.addEventListener('input', function (e) {
             let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
-
             if (valor.length > 11) valor = valor.slice(0, 11); // Limita a 11 dígitos
 
             // Aplica a formatação para celular (11 dígitos) ou fixo (10 dígitos)
@@ -204,11 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const idEditar = urlParams.get('editar');
         const btnSubmit = formCadastro.querySelector("button[type='submit']");
 
-
         if (idEditar) {
             tituloCadastro.textContent = "✏️ Editar Paciente";
             btnSubmit.textContent = "Salvar Alterações";
-
 
             async function carregarDadosParaEdicao() {
                 try {
@@ -232,6 +227,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         formCadastro.elements['religiao'].value = p.religiao || '';
                         formCadastro.elements['indicacao'].value = p.indicacao || '';
                         formCadastro.elements['observacoes'].value = p.observacoes || '';
+                        
+                        // Campos recém adicionados:
+                        formCadastro.elements['genero'].value = p.genero || '';
+                        formCadastro.elements['sexo'].value = p.sexo || '';
+
                     } else {
                         alert("Erro ao carregar paciente.");
                         window.location.href = "agenda.html";
@@ -243,18 +243,15 @@ document.addEventListener("DOMContentLoaded", () => {
             carregarDadosParaEdicao();
         }
 
-
         formCadastro.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             const formData = new FormData(formCadastro);
             const dados = Object.fromEntries(formData.entries());
 
-
             if (idEditar) {
                 dados.id = idEditar;
             }
-
 
             const endpoint = idEditar ? "../../backend/editar_paciente.php" : "../../backend/cadastrar_paciente.php";
 
@@ -273,7 +270,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (resposta.ok && resultado.sucesso) {
                     alert(resultado.mensagem);
 
-
                     if (idEditar) {
                         window.location.href = "agenda.html";
                     } else {
@@ -290,6 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
     // ==========================================
     // TELA DE PACIENTES (agenda.html)
     // ==========================================
@@ -299,7 +296,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (tabelaPacientes) {
         async function carregarPacientes(queryString = "") {
             try {
-                tabelaPacientes.innerHTML = "<tr><td colspan='9' style='text-align:center;'>A carregar dados...</td></tr>";
+                // Alterado o colspan de 9 para 10 devido às novas colunas
+                tabelaPacientes.innerHTML = "<tr><td colspan='10' style='text-align:center;'>A carregar dados...</td></tr>";
 
                 const url = `../../backend/listar_pacientes.php${queryString ? '?' + queryString : ''}`;
 
@@ -314,16 +312,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     tabelaPacientes.innerHTML = "";
 
                     if (resultado.pacientes.length === 0) {
-                        tabelaPacientes.innerHTML = "<tr><td colspan='9' style='text-align:center;'>Nenhum paciente encontrado.</td></tr>";
+                        tabelaPacientes.innerHTML = "<tr><td colspan='10' style='text-align:center;'>Nenhum paciente encontrado.</td></tr>";
                         return;
                     }
 
                     resultado.pacientes.forEach(p => {
                         const tr = document.createElement("tr");
+                        
+                        // Adicionada formatação visual básica (capitalize e substituição de hífens) para o Gênero e o Sexo
                         tr.innerHTML = `
                             <td>${String(p.prontuario).padStart(4, '0')}</td>
                             <td>${p.nome}</td>
-                            <td>--</td>
+                            <td style="text-transform: capitalize;">${p.genero ? p.genero.replace('-', ' ') : '--'}</td>
+                            <td style="text-transform: capitalize;">${p.sexo || '--'}</td>
                             <td>${p.data_nascimento.split('-').reverse().join('/')}</td>
                             <td>${p.cpf}</td>
                             <td>${p.telefone}</td>
@@ -370,10 +371,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
 
                 } else {
-                    tabelaPacientes.innerHTML = `<tr><td colspan='9' style='text-align:center; color: red;'>Erro: ${resultado.mensagem}</td></tr>`;
+                    tabelaPacientes.innerHTML = `<tr><td colspan='10' style='text-align:center; color: red;'>Erro: ${resultado.mensagem}</td></tr>`;
                 }
             } catch (erro) {
-                tabelaPacientes.innerHTML = "<tr><td colspan='9' style='text-align:center; color: red;'>Erro ao conectar com o servidor.</td></tr>";
+                tabelaPacientes.innerHTML = "<tr><td colspan='10' style='text-align:center; color: red;'>Erro ao conectar com o servidor.</td></tr>";
             }
         }
 
@@ -388,6 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     }
+
     // ==========================================
     // TELA DE AGENDAMENTO (agendar.html)
     // ==========================================
