@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         formCadastro.elements['religiao'].value = p.religiao || '';
                         formCadastro.elements['indicacao'].value = p.indicacao || '';
                         formCadastro.elements['observacoes'].value = p.observacoes || '';
-                        
+
                         // Campos recém adicionados:
                         formCadastro.elements['genero'].value = p.genero || '';
                         formCadastro.elements['sexo'].value = p.sexo || '';
@@ -318,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     resultado.pacientes.forEach(p => {
                         const tr = document.createElement("tr");
-                        
+
                         // Adicionada formatação visual básica (capitalize e substituição de hífens) para o Gênero e o Sexo
                         tr.innerHTML = `
                             <td>${String(p.prontuario).padStart(4, '0')}</td>
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <td><a href="agendar.html?paciente=${p.cpf}">Agendar</a></td>
                             <td>
                                 <button type="button" class="btn-editar" data-id="${p.prontuario}" style="cursor:pointer;">Editar</button>
-                                <button type="button" class="btn-excluir" data-id="${p.prontuario}" style="cursor:pointer; color:white; margin-left:5px;">Excluir</button>
+                                <button type="button" class="btn-excluir" data-id="${p.prontuario}" style="cursor:pointer; color:white;">Excluir</button>
                             </td>
                         `;
                         tabelaPacientes.appendChild(tr);

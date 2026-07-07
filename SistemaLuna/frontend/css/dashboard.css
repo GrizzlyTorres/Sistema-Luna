@@ -12,13 +12,11 @@
     box-shadow: var(--sombra-padrao);
 }
 
-/* Altera a cor dos links dentro do card destaque para branco */
 .destaque a {
     color: white;
-    text-decoration: none; /* Opcional: remove o sublinhado padrão para um visual mais limpo */
+    text-decoration: none; 
 }
 
-/* Adiciona um efeito ao passar o mouse para indicar que é clicável */
 .destaque a:hover {
     text-decoration: underline;
     opacity: 0.9;
@@ -33,7 +31,15 @@
 }
 
 .card ul { list-style: none; }
-.card li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.95rem; }
+.card li { 
+    padding: 0.5rem 0; 
+    border-bottom: 1px solid #f0f0f0; 
+    font-size: 0.95rem; 
+    
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
 .card li:last-child { border-bottom: none; }
 
 .destaque { grid-column: 1 / -1; background-color: var(--cor-primaria); color: white; }
@@ -42,3 +48,8 @@
 
 .atalhos button { display: block; width: 100%; margin-bottom: 0.75rem; background: var(--cor-fundo); color: var(--cor-primaria); border: 1px solid var(--cor-primaria); font-weight: bold; }
 .atalhos button:hover { background: var(--cor-primaria); color: white; }
+
+.botoes-acao {
+    display: flex;
+    gap: 8px; /* Dá um espaçamento entre os botões */
+}
