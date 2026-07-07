@@ -2,7 +2,7 @@
 require_once 'verifica_auth.php';
 
 try {
-    $sql = "SELECT id as prontuario, nome, data_nascimento, cpf, telefone, data_cadastro FROM pacientes WHERE 1=1";
+    $sql = "SELECT id as prontuario, nome, genero, sexo, data_nascimento, cpf, telefone, data_cadastro FROM pacientes WHERE 1=1";
     $parametros = [];
 
     if (isset($_GET['nome']) && trim($_GET['nome']) !== "") {
