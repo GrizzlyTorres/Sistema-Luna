@@ -12,6 +12,18 @@
     box-shadow: var(--sombra-padrao);
 }
 
+/* Altera a cor dos links dentro do card destaque para branco */
+.destaque a {
+    color: white;
+    text-decoration: none; /* Opcional: remove o sublinhado padrão para um visual mais limpo */
+}
+
+/* Adiciona um efeito ao passar o mouse para indicar que é clicável */
+.destaque a:hover {
+    text-decoration: underline;
+    opacity: 0.9;
+}
+
 .card h2 {
     color: var(--cor-secundaria);
     font-size: 1.25rem;
