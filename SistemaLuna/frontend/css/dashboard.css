@@ -53,3 +53,88 @@
     display: flex;
     gap: 8px; /* Dá um espaçamento entre os botões */
 }
+
+.card-avisos .topo-avisos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--cor-fundo);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-avisos .topo-avisos h2 {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.btn-add-aviso {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--cor-primaria);
+    border: none;
+    cursor: pointer;
+    position: relative; 
+    color: transparent; 
+}
+
+.btn-add-aviso::before {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 14px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-add-aviso::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 2px;
+    height: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-add-aviso:hover {
+    background-color: var(--cor-primaria-hover);
+}
+
+#lista-avisos li.item-aviso {
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 4px;
+}
+
+#lista-avisos li.item-aviso:hover {
+    background-color: #f4f7f6; 
+}
+
+.aviso-texto {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.aviso-texto.expandido {
+    white-space: normal;
+    word-break: break-word;
+    text-overflow: clip;
+}
+
+.btn-excluir-aviso {
+    flex-shrink: 0;
+}
