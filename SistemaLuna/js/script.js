@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let avisos = JSON.parse(localStorage.getItem("luna_avisos"));
         if (!avisos) {
             avisos = [
-                { id: 1, texto: "João faltou à última consulta" },
+                { id: 1, texto: "Ligar urgentemente para o paciente Carlos Alberto para confirmar o reagendamento da sessão de terapia desta sexta-feira. Ele mencionou possíveis conflitos de horário devido a uma viagem de trabalho." },
                 { id: 2, texto: "Maria pediu remarcação" },
                 { id: 3, texto: "Paciente novo a aguardar cadastro" }
             ];
@@ -133,20 +133,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
             avisos.forEach(aviso => {
                 const li = document.createElement("li");
-                li.style.display = "flex";
-                li.style.justifyContent = "space-between";
-                li.style.alignItems = "center";
-                li.style.marginBottom = "5px";
+                li.classList.add("item-aviso");
 
                 li.innerHTML = `
-                    <span>${aviso.texto}</span>
-                    <button class="btn-excluir-aviso" data-id="${aviso.id}" title="Excluir aviso" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; font-size:1.1rem;">&times;</button>
-                `;
+                <span class="aviso-texto" title="Clique para expandir/recolher">${aviso.texto}</span>
+                <button type="button" class="btn-excluir-aviso" data-id="${aviso.id}" title="Excluir aviso" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; font-size:1.1rem;">&times;</button>
+            `;
+
+                // Clicar em qualquer lugar da linha expande/recolhe o aviso
+                li.addEventListener("click", () => {
+                    const spanTexto = li.querySelector(".aviso-texto");
+                    spanTexto.classList.toggle("expandido");
+                });
+
                 listaAvisos.appendChild(li);
             });
 
             document.querySelectorAll(".btn-excluir-aviso").forEach(btn => {
                 btn.addEventListener("click", (e) => {
+                    e.stopPropagation();
                     const idParaRemover = parseInt(e.target.getAttribute("data-id"));
                     avisos = avisos.filter(a => a.id !== idParaRemover);
                     localStorage.setItem("luna_avisos", JSON.stringify(avisos));
@@ -155,6 +160,23 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         renderizarAvisos();
+
+        // Botão "+" para criar um novo aviso
+        const btnAddAviso = document.getElementById("btn-add-aviso");
+        if (btnAddAviso) {
+            btnAddAviso.addEventListener("click", () => {
+                const texto = prompt("Digite o novo aviso:");
+                if (texto && texto.trim() !== "") {
+                    const novoId = avisos.length > 0
+                        ? Math.max(...avisos.map(a => a.id)) + 1
+                        : 1;
+
+                    avisos.push({ id: novoId, texto: texto.trim() });
+                    localStorage.setItem("luna_avisos", JSON.stringify(avisos));
+                    renderizarAvisos();
+                }
+            });
+        }
     }
 
     // ==========================================
